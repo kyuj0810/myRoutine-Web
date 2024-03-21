@@ -5,9 +5,7 @@ const Title = styled.h1`
   color: ${(props) => props.theme.fontColor};
 `;
 
-const Containter = styled.div`
-  background-color: ${(props) => props.theme.bgColor};
-`;
+const Containter = styled.div``;
 
 function Login() {
   return (
