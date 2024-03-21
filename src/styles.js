@@ -13,7 +13,19 @@ export const darkTeme = {
 
 export const GlobalStyles = createGlobalStyle`
     ${reset}
+    input {
+        all: unset;
+    }
+    * {
+        box-sizing: border-box;
+    }
     body {
         background-color: ${(props) => props.theme.bgColor};
+        font-size: 14px;  
+        font-family: "Noto Sans KR", sans-serif;
+    }
+
+    a {
+        text-decoration: none;
     }
 `;
