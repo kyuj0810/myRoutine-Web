@@ -6,3 +6,9 @@ export const BaseBox = styled.div`
   border: 1px solid ${(props) => props.theme.borderColor};
   width: 100%;
 `;
+
+export const fatLink = styled.div`
+  font-weight: 600;
+  font-size: 16px;
+  color: rgb(142, 142, 142);
+`;

@@ -40,7 +40,7 @@ function Login() {
       <BottomBox
         cta={"Don't have an account?"}
         link={routes.signUp}
-        linkText={'Sign Up'}
+        linkText={'Sign up'}
       ></BottomBox>
     </AuthLayout>
   );
