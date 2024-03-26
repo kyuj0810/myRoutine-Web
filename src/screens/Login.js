@@ -12,6 +12,7 @@ import BottomBox from '../components/auth/BottomBox';
 
 import PageTitle from '../components/PageTitle';
 import { useForm } from 'react-hook-form';
+import FormError from '../components/auth/FormError';
 
 const FacebookLogin = styled.div`
   color: #385285;
@@ -22,15 +23,11 @@ const FacebookLogin = styled.div`
 `;
 
 function Login() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState } = useForm({ mode: 'onChange' });
   const onSubmitValid = (data) => {
-    console.log('onSubmitValid');
-    console.log(data);
+    // console.log(data);
   };
-  const onSubmitInValid = (data) => {
-    console.log('onSubmitInValid');
-    console.log(data);
-  };
+
   return (
     <AuthLayout>
       <PageTitle title="Log in" />
@@ -39,22 +36,30 @@ function Login() {
           <FontAwesomeIcon icon={faCalendar} size="2x" />{' '}
           <span>My Routine</span>
         </div>
-        <form onSubmit={handleSubmit(onSubmitValid, onSubmitInValid)}>
+        <form onSubmit={handleSubmit(onSubmitValid)}>
           <Input
             {...register('username', {
-              required: 'Username is required.',
-              validate: (currentValue) => currentValue.includes('potato'),
-              minLength: 5,
+              required: 'Username는 필수입력입니다.',
+              minLength: {
+                value: 5,
+                message: 'Username는 5글자 이상 입력해주세요.',
+              },
             })}
+            hasError={Boolean(formState.errors?.username?.message)}
             type="text"
             placeholder="Username"
           />
+          <FormError message={formState.errors?.username?.message} />
           <Input
-            {...register('password', { required: 'Password is required.' })}
+            {...register('password', {
+              required: 'Password는 필수입력입니다.',
+            })}
+            hasError={Boolean(formState.errors?.password?.message)}
             type="password"
             placeholder="Password"
           />
-          <Button type="submit" value="Log in" />
+          <FormError message={formState.errors?.password?.message} />
+          <Button type="submit" value="Log in" disabled={!formState.isValid} />
         </form>
         <Separator />
         <FacebookLogin>
