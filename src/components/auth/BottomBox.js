@@ -22,7 +22,7 @@ function BottomBox({ cta, link, linkText }) {
   );
 }
 
-BottomBox.prototype = {
+BottomBox.propTypes = {
   cta: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
   linkText: PropTypes.string.isRequired,

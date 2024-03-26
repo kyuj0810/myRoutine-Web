@@ -3,12 +3,12 @@ import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 import routes from '../routes';
 import AuthLayout from '../components/auth/AuthLayout';
 import Button from '../components/auth/Button';
-import Separator from '../components/auth/Separator';
 import Input from '../components/auth/Input';
 import FormBox from '../components/auth/FormBox';
 import BottomBox from '../components/auth/BottomBox';
 import styled from 'styled-components';
 import { fatLink } from '../components/shared';
+import PageTitle from '../components/PageTitle';
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -25,6 +25,7 @@ const Subtitle = styled(fatLink)`
 function SignUp() {
   return (
     <AuthLayout>
+      <PageTitle title="Sign up" />
       <FormBox>
         <HeaderContainer>
           <FontAwesomeIcon icon={faCalendar} size="2x" />{' '}
