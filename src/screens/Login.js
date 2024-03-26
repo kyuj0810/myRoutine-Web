@@ -9,6 +9,7 @@ import Separator from '../components/auth/Separator';
 import Input from '../components/auth/Input';
 import FormBox from '../components/auth/FormBox';
 import BottomBox from '../components/auth/BottomBox';
+import { useState } from 'react';
 
 const FacebookLogin = styled.div`
   color: #385285;
@@ -19,6 +20,22 @@ const FacebookLogin = styled.div`
 `;
 
 function Login() {
+  const [username, setUsername] = useState('');
+  const [usernameError, setUsernameError] = useState('');
+  const onUsernameChange = (event) => {
+    setUsernameError('');
+    setUsername(event.target.value);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (username === '') {
+      setUsernameError('not empty error');
+    }
+    if (username.length < 10) {
+      setUsernameError('short error');
+    }
+    console.log(username);
+  };
   return (
     <AuthLayout>
       <FormBox>
@@ -26,10 +43,20 @@ function Login() {
           <FontAwesomeIcon icon={faCalendar} size="2x" />{' '}
           <span>My Routine</span>
         </div>
-        <form>
-          <Input type="text" placeholder="Username" />
+        <p>{usernameError}</p>
+        <form onSubmit={handleSubmit}>
+          <Input
+            onChange={onUsernameChange}
+            value={username}
+            type="text"
+            placeholder="Username"
+          />
           <Input type="password" placeholder="Password" />
-          <Button type="submit" value="Log in" />
+          <Button
+            type="submit"
+            value="Log in"
+            disabled={username === '' || username.length < 10}
+          />
         </form>
         <Separator />
         <FacebookLogin>
