@@ -64,12 +64,14 @@ function SignUp() {
     if (loading) {
       return;
     }
-    const { username, email, password } = getValues();
-    console.log(username);
+    // const { username, email, password } = getValues();
+
     createAccount({
       variables: {
-        username,
-        password,
+        // username,
+        // email,
+        // password,
+        ...data,
       },
     });
   };
@@ -106,7 +108,7 @@ function SignUp() {
           />
           <FormError message={formState.errors?.email?.message} />
           <Input
-            {...register('Password', {
+            {...register('password', {
               required: 'Password는 필수입력입니다.',
             })}
             onChange={clearLoginError}
