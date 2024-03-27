@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 const SFormError = styled.span`
   color: tomato;
@@ -13,9 +12,5 @@ function FormError({ message }) {
     <SFormError> {message}</SFormError>
   );
 }
-
-FormError.propTypes = {
-  message: PropTypes.string.isRequired,
-};
 
 export default FormError;
