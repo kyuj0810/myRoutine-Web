@@ -14,6 +14,7 @@ import PageTitle from '../components/PageTitle';
 import { useForm } from 'react-hook-form';
 import FormError from '../components/auth/FormError';
 import { gql, useMutation } from '@apollo/client';
+import { logUserIn } from '../apollo';
 
 const FacebookLogin = styled.div`
   color: #385285;
@@ -34,7 +35,14 @@ const LOGIN_MUTATION = gql`
 `;
 
 function Login() {
-  const { register, handleSubmit, formState, getValues, setError } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState,
+    getValues,
+    setError,
+    clearErrors,
+  } = useForm({
     mode: 'onChange',
   });
   const onCompleted = (data) => {
@@ -43,6 +51,9 @@ function Login() {
     } = data;
     if (!ok) {
       setError('result', { message: error });
+    }
+    if (token) {
+      logUserIn(token);
     }
   };
   const [login, { loading }] = useMutation(LOGIN_MUTATION, { onCompleted });
@@ -57,6 +68,9 @@ function Login() {
         password,
       },
     });
+  };
+  const clearLoginError = () => {
+    clearErrors('result');
   };
 
   return (
@@ -76,6 +90,7 @@ function Login() {
                 message: 'Username는 5글자 이상 입력해주세요.',
               },
             })}
+            onChange={clearLoginError}
             haserror={Boolean(formState.errors?.username?.message).toString()}
             type="text"
             placeholder="Username"
@@ -85,6 +100,7 @@ function Login() {
             {...register('password', {
               required: 'Password는 필수입력입니다.',
             })}
+            onChange={clearLoginError}
             haserror={Boolean(formState.errors?.password?.message).toString()}
             type="password"
             placeholder="Password"
