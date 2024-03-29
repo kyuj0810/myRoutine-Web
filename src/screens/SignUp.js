@@ -12,6 +12,7 @@ import PageTitle from '../components/PageTitle';
 import { gql, useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import FormError from '../components/auth/FormError';
+import { useNavigate } from 'react-router-dom';
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -39,12 +40,23 @@ const CREATE_ACCOUNT_MUTATION = gql`
 `;
 
 function SignUp() {
+  const navigate = useNavigate();
   const onCompleted = (data) => {
+    const { username, password } = getValues();
     const {
       createAccount: { ok, error },
     } = data;
+
     if (!ok) {
       setError('result', { message: error });
+    } else {
+      navigate(routes.home, {
+        state: {
+          message: '계정이 생성되었습니다. 로그인 해주세요.',
+          username,
+          password,
+        },
+      });
     }
   };
   const [createAccount, { loading }] = useMutation(CREATE_ACCOUNT_MUTATION, {
