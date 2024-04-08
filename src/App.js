@@ -9,6 +9,7 @@ import { GlobalStyles, darkTeme, lightTheme } from './styles';
 import SignUp from './screens/SignUp';
 import routes from './routes';
 import { HelmetProvider } from 'react-helmet-async';
+import RoutineCreate from './screens/RoutineCreate';
 
 function App() {
   const isLoggedIn = useReactiveVar(isLoggedInVar);
@@ -26,6 +27,12 @@ function App() {
               />
               {!isLoggedIn ? (
                 <Route path={routes.signUp} element={<SignUp />} />
+              ) : null}
+              {isLoggedIn ? (
+                <Route
+                  path={routes.routineCreate}
+                  element={<RoutineCreate />}
+                />
               ) : null}
               <Route path="*" element={<NotFound />} />
               {/* <Route path="*" element={<Navigate to="/" />} /> */}
