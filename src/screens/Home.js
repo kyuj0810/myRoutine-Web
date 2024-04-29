@@ -11,7 +11,7 @@ function Home() {
   return (
     <div>
       <h1>Weclome we did it!</h1>
-      <button onClick={() => logUserOut(location)}>Log in out!</button>
+      <button onClick={() => logUserOut()}>Log in out!</button>
       <button onClick={() => goRoutineCreate(location)}>루틴 생성</button>
     </div>
   );
