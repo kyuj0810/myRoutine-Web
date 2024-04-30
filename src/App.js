@@ -37,12 +37,20 @@ function App() {
               {!isLoggedIn ? (
                 <Route path={routes.signUp} element={<SignUp />} />
               ) : null}
-              {isLoggedIn ? (
-                <Route
-                  path={routes.routineCreate}
-                  element={<RoutineCreate />}
-                />
-              ) : null}
+
+              <Route
+                path={routes.routineCreate}
+                element={
+                  isLoggedIn ? (
+                    <Layout>
+                      <RoutineCreate />
+                    </Layout>
+                  ) : (
+                    <Login />
+                  )
+                }
+              />
+
               <Route path="*" element={<NotFound />} />
               {/* <Route path="*" element={<Navigate to="/" />} /> */}
             </Routes>

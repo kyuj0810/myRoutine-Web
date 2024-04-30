@@ -13,14 +13,14 @@ const ME_QUERY = gql`
 
 function useUser() {
   const isLoggedIn = useReactiveVar(isLoggedInVar);
-  const { data, error } = useQuery(ME_QUERY, { skip: !isLoggedIn });
-  console.log(data);
+  const { data } = useQuery(ME_QUERY, { skip: !isLoggedIn });
+
   useEffect(() => {
     if (data?.me === null) {
       logUserOut();
     }
   }, [data]);
-  return;
+  return { data };
 }
 
 export default useUser;
